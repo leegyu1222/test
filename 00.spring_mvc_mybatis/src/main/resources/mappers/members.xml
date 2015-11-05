@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.mapper.MemberMapper">
+	<resultMap id="memberResult" type="com.work.spring03.dto.Member">
+		<result property="userid" column="userid" />
+		<result property="userpw" column="userpw" />
+		<result property="name" column="name" />
+		<result property="mobile" column="mobile" />
+		<result property="email" column="email" />
+		<result property="entryDate" column="entry_date" />
+		<result property="grade" column="grade" />
+		<result property="mileage" column="mileage" />
+	</resultMap>
+
+	<!-- insert -->
+	<insert id="insertMember" parameterType="com.work.spring03.dto.Member">
+		insert into members_test
+		values (#{userid}, #{userpw}, #{name}, #{mobile}, #{email}, #{entryDate}, #{grade}, #{mileage})
+	</insert>
+	
+	<!-- select -->
+	<select id="selectLogin" resultType="String">
+		select grade from members_test where userid = #{userid} and userpw = #{userpw}
+	</select>
+	
+	<select id="selectMember" resultType="Member">
+		select * from members_test where userid = #{userid}
+	</select>	
+	
+	<!-- update -->
+	<update id="updateUserpw" >
+		update members_test set userpw = #{updateUserpw} where #{userid} and userpw = #{userpw}
+	</update>
+
+	<!-- delete -->
+	<delete id="deleteMember" parameterType="String">
+		delete members_test where userid=#{userid}
+	</delete>
+
+</mapper>
